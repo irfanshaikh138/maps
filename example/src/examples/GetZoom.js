@@ -22,7 +22,7 @@ class GetZoom extends React.Component {
   }
 
   async onRegionDidChange() {
-    const zoom = await this._map.getZoom();
+    const zoom = await this._map.setLayoutProperty();
     this.setState({zoom});
   }
 
