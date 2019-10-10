@@ -38,6 +38,7 @@ declare namespace MapboxGL {
         queryRenderedFeaturesInRect(coordinate: Array<number>, filter?: Array<string>, layerIds?: Array<string>): Promise<void>;
         takeSnap(writeToDisk?: boolean): Promise<string>;
         getZoom(): Promise<number>;
+        setLayoutProperty(layerId: string,propertyName:string,propertyValue:string): Promise<void>;
         getCenter(): Promise<Array<number>>;
         showAttribution(): void
     }

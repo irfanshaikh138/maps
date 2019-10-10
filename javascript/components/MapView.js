@@ -469,6 +469,29 @@ class MapView extends NativeBridgeComponent(React.Component) {
     const res = await this._runNativeCommand('getZoom', this._nativeRef);
     return res.zoom;
   }
+  /**
+   * Sets the Property Value based on Property Nameof a layerID
+   *
+   * @example
+   * await this._map.setLayoutProperty('country-label', 'visibility', 'none');
+   * @param  {String}  layerID  Name of the Layer ID.
+   * @param  {String}  propertyName  Name of the property Name.
+   * @param  {String}  propertyValue  Name of the Property Value.
+   */
+
+  async setLayoutProperty(layerID, propertyName, propertyValue) {
+    const res = await this._runNativeCommand(
+      'setLayoutProperty',
+      this._nativeRef,
+      [layerID, propertyName, propertyValue],
+    );
+
+    if (isAndroid()) {
+      return JSON.parse(res.data);
+    }
+
+    return res.data;
+  }
 
   /**
    * Returns the map's geographical centerpoint

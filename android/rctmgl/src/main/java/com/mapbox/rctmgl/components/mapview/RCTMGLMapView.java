@@ -56,6 +56,7 @@ import com.mapbox.rctmgl.events.constants.EventTypes;
 import com.mapbox.rctmgl.utils.BitmapUtils;
 import com.mapbox.rctmgl.utils.GeoJSONUtils;
 import com.mapbox.rctmgl.utils.GeoViewport;
+import com.mapbox.mapboxsdk.style.layers.PropertyValue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -773,6 +774,45 @@ public class RCTMGLMapView extends MapView implements OnMapReadyCallback, Mapbox
 
         AndroidCallbackEvent event = new AndroidCallbackEvent(this, callbackID, payload);
         mManager.handleEvent(event);
+    }
+
+    // TODO - Investigate this warning -
+    // https://stackoverflow.com/questions/5295635/how-to-fix-unchecked-call-warning-in-java
+    @SuppressWarnings("unchecked")
+    public void setLayoutProperty(String callbackID, String layerID, String propertyName, String propertyValue) {
+        // TODO - Try using getLayer(layerId) or something like that to avoid the for
+        // looping and filtering
+
+        Layer layer = mMap.getStyle().getLayer(layerID);
+        if (layer != null) {
+            PropertyValue newPropertyValue = new PropertyValue(propertyName, propertyValue);
+
+            layer.setProperties(newPropertyValue);
+        }
+
+        // Boolean mVisible = false;
+        // Class cls = PropertyFactory.class;
+        // Method[] methods = cls.getMethods();
+        // String nameoffun = "visibility";
+        // for (Method method : methods)
+        // if (method.getName() == nameoffun) {
+        //
+        // }
+
+        // List<Layer> mapboxLayers = mMap.getStyle().getLayers();
+        //
+        //
+        // for (int i = mapboxLayers.size() - 1; i >= 0; i--) {
+        // Layer mapboxLayer = mapboxLayers.get(i);
+        //
+        // String layerIdCal = mapboxLayer.getId();
+        // layerID="country-label";
+        // if (layerID.equals(layerIdCal)) {
+        // Boolean mVisible=false;
+        // String visibility = mVisible ? Property.VISIBLE : Property.NONE;
+        // mapboxLayer.setProperties(PropertyFactory.visibility(visibility));
+        // }
+        // }
     }
 
     public void queryRenderedFeaturesInRect(String callbackID, RectF rect, Expression filter, List<String> layerIDs) {

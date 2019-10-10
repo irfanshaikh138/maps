@@ -203,6 +203,7 @@ public class RCTMGLMapViewManager extends AbstractEventEmitter<RCTMGLMapView> {
     public static final int METHOD_GET_CENTER = 9;
     public static final int METHOD_SET_HANDLED_MAP_EVENTS = 10;
     public static final int METHOD_SHOW_ATTRIBUTION = 11;
+    public static final int METHOD_SET_LAYOUT_PROPERTY = 12;
 
     @Nullable
     @Override
@@ -218,6 +219,7 @@ public class RCTMGLMapViewManager extends AbstractEventEmitter<RCTMGLMapView> {
                 .put("getCenter", METHOD_GET_CENTER)
                 .put( "setHandledMapChangedEvents", METHOD_SET_HANDLED_MAP_EVENTS)
                 .put("showAttribution", METHOD_SHOW_ATTRIBUTION)
+                .put("setLayoutProperty", METHOD_SET_LAYOUT_PROPERTY)
                 .build();
     }
 
@@ -275,6 +277,9 @@ public class RCTMGLMapViewManager extends AbstractEventEmitter<RCTMGLMapView> {
             case METHOD_SHOW_ATTRIBUTION:
                 mapView.showAttribution();
                 break;
+            case METHOD_SET_LAYOUT_PROPERTY:
+                mapView.setLayoutProperty(args.getString(0), args.getString(1), args.getString(2), args.getString(3));
+                break;    
         }
     }
 

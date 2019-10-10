@@ -26,11 +26,17 @@ class GetZoom extends React.Component {
     this.setState({zoom});
   }
 
+  // calling setLayoutProperty in onRegionIsChanging
+  async onRegionIsChanging() {
+    await this._map.setLayoutProperty('country-label', 'visibility', 'none');
+  }
+
   render() {
     return (
       <Page {...this.props}>
         <MapboxGL.MapView
           onRegionDidChange={this.onRegionDidChange}
+          onRegionIsChanging={this.onRegionIsChanging}
           ref={c => (this._map = c)}
           onPress={this.onPress}
           style={{flex: 1}}
